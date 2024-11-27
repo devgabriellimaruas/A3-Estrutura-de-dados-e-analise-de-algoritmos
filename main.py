@@ -1,9 +1,15 @@
 import math
+import time
+import tracemalloc
 from src.services.data_manipulation import gerar_cenario_mais_entregas, gerar_cenario_menos_entregas, alocar_entregas
 from src.services.create_sheets import criar_planilha_entregas
 
 
 if __name__ == "__main__":
+    # Inicia o o tempo de execução
+    start_time = time.time()
+    # Inicia o rastreamento de alocação de memória
+    tracemalloc.start()
     grafo, entregas, caminhoes = gerar_cenario_mais_entregas(caminhoes_por_centro=5)
     alocar_entregas(entregas, caminhoes, grafo)
 
@@ -35,8 +41,25 @@ if __name__ == "__main__":
     # Criar o arquivo Excel
     criar_planilha_entregas(dados_entregas, "mais_entregas_caminhoes.xlsx")
     
-    #Criando cenário 2
+    # Tempo de execução
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Tempo de execução do cenário 1: {elapsed_time} segundos")
     
+    # Memória alocada
+    memoria_usada = tracemalloc.get_traced_memory()[1] / 1024  # Usado em KB
+    print(f"Memória após a execução do cenário 1: {memoria_usada} KB")
+
+    # Finaliza o rastreamento
+    tracemalloc.stop()
+    
+    
+    
+    #Criando cenário 2
+    # Inicia o o tempo de execução
+    start_time = time.time()
+    # Inicia o rastreamento de alocação de memória
+    tracemalloc.start()
     grafo, entregas, caminhoes = gerar_cenario_menos_entregas(caminhoes_por_centro=5)
     alocar_entregas(entregas, caminhoes, grafo)
 
@@ -67,3 +90,14 @@ if __name__ == "__main__":
 
     # Criar o arquivo Excel
     criar_planilha_entregas(dados_entregas, "menos_entregas_caminhoes.xlsx")
+
+    # Tempo de execução
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Tempo de execução do cenário 1: {elapsed_time} segundos")
+    
+    # Memória alocada
+    memoria_usada = tracemalloc.get_traced_memory()[1] / 1024  # Usado em KB
+    print(f"Memória após a execução do cenário 1: {memoria_usada} KB")
+    # Finaliza o rastreamento
+    tracemalloc.stop()

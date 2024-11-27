@@ -35,7 +35,7 @@ def alocar_entregas(entregas, caminhoes, grafo):
                 print(f"Motivo: {motivo_rejeicao}")
 
 
-def gerar_cenario_mais_entregas(caminhoes_por_centro=5):
+def gerar_cenario_mais_entregas(caminhoes_por_centro=6):
     grafo = Grafo()
 
     # Mocamos as coordenadas das localização e destinos
@@ -88,7 +88,7 @@ def gerar_cenario_mais_entregas(caminhoes_por_centro=5):
 
     return grafo, entregas, caminhoes
 
-def gerar_cenario_menos_entregas(caminhoes_por_centro=5):
+def gerar_cenario_menos_entregas(caminhoes_por_centro=4):
     grafo = Grafo()
 
     # Mocamos as coordenadas das localização e destinos
